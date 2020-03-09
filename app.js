@@ -1,20 +1,47 @@
-//Тоглогчийн ээлжийг хадгалах хувьсагч; 1р тоглогчийг 0;2р тоглогчийг 1 гэж тэмдэглэе.
-var activePlayer = 0;
-//Тоглогчдийн цуглуулсан оноог хадгалах хувьсагч
+// Тоглоомын бүх газарт ашиглагдах гобаль хувьсагчдыг энд зарлая
+//Аль тоглогч шоо шидэх вэ гэдгийг энд хадгална
+var activePlayer;
+
+// хоёр тоглогчийн цуглуулсан оноонууд
 var scores = [0, 0];
-//Идвэхитэй тоглогчийн улаан дотор хадгалагдаж байгаа ээлжийн оноог цуглуулж байгаа хувьсагч
+
+// Идвэхитэй тоглогчийн цуглуулж байгаа ээлжиий оноо
 var roundScore = 0;
-
-//Шоо аль талаараа буусныг хадгалах хувьсагч хэрэгтэй. 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
-
-//программ эхлэхэд бэлтгэх
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
-
+// Шооны зургийг үзүүлэх элементийг ДОМ оос ирж олоод энд хадгалая
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
+
+// Тоглоомыг эхлүүлнэ
+initGame();
+
+// Тоглоомыг шинээр эхлэхэд бэлтгэнэ.
+function initGame() {
+  //Тоглогчийн ээлжийг хадгалах хувьсагч; 1р тоглогчийг 0;2р тоглогчийг 1 гэж тэмдэглэе.
+  activePlayer = 0;
+  //Тоглогчдийн цуглуулсан оноог хадгалах хувьсагч
+  scores = [0, 0];
+  //Идвэхитэй тоглогчийн улаан дотор хадгалагдаж байгаа ээлжийн оноог цуглуулж байгаа хувьсагч
+  roundScore = 0;
+
+  //Шоо аль талаараа буусныг хадгалах хувьсагч хэрэгтэй. 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
+
+  //программ эхлэхэд бэлтгэх
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+  diceDom.style.display = "none";
+}
+// Тоглогчдийн нэрийг буцааж гаргах
+document.getElementById("name-0").textContent = "player 1";
+document.getElementById("name-1").textContent = "player 2";
+
+document.querySelector(".player-0-panel").classList.remove("winner");
+document.querySelector(".player-1-panel").classList.remove("winner");
+
+document.querySelector(".player-0-panel").classList.remove("active");
+document.querySelector(".player-1-panel").classList.remove("active");
+
+document.querySelector(".player-0-panel").classList.add("active");
 
 //ШООГ ШИДЭХ ЭВЕНТ ЛИСТЕНЭР
 document.querySelector(".btn-roll").addEventListener("click", function() {
@@ -78,3 +105,6 @@ function switchToNextPlayer() {
   //Шоог түр алга болгох
   diceDom.style.display = "none";
 }
+
+// New Game товч буюу Шинэ тоглоом эхлүүлэх
+document.querySelector(".btn-new").addEventListener("click", initGame);
